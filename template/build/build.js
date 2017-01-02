@@ -1,5 +1,6 @@
 // https://github.com/shelljs/shelljs
 require('shelljs/global')
+var fs = require('fs')
 env.NODE_ENV = 'production'
 
 var path = require('path')
@@ -26,10 +27,24 @@ webpack(webpackConfig, function (err, stats) {
   spinner.stop()
   if (err) throw err
   process.stdout.write(stats.toString({
-    colors: true,
-    modules: false,
-    children: false,
-    chunks: false,
-    chunkModules: false
-  }) + '\n')
+      // contex: false,
+      // hash: false,
+      // version: false,
+      // timings: false,
+      // assets: false,
+      // cached: false,
+      // reasons: false,
+      // source: false,
+      // errorDetails: false,
+      // chunkOrigins : false,
+      // modulesSort: false,
+      // chunksSort : false,
+      // assetsSort : false,
+      colors: true,
+      modules: false,
+      children: false,
+      chunks: false,
+      chunkModules: false
+    }) + '\n')
+  fs.writeFileSync('profile/packStats.json', JSON.stringify(stats.toJson()))
 })

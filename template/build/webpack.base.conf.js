@@ -2,6 +2,7 @@ var path = require('path')
 var config = require('../config')
 var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
+var isProduction = (process.env.NODE_ENV === 'production')
 
 module.exports = {
   entry: {
@@ -15,16 +16,37 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.vue'],
     fallback: [path.join(__dirname, '../node_modules')],
-    alias: {
+    alias: isProduction ? {
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
-      'components': path.resolve(__dirname, '../src/components')
+      'components': path.resolve(__dirname, '../src/components'),
+      'moment': 'moment/min/moment.min.js',
+      'vue-router': 'vue-router/dist/vue-router.min.js',
+      'vue-resource': 'vue-resource/dist/vue-resource.min.js',
+      'vuex': 'vuex/dist/vuex.min.js',
+      'vux-src-components': 'vux/src/components',
+      'vux-components': 'vux/dist/components',
+      'vux-src-styles': 'vux/src/styles',
+      'vux-styles': 'vux/dist/styles'
+    } : {
+      'src': path.resolve(__dirname, '../src'),
+      'assets': path.resolve(__dirname, '../src/assets'),
+      'components': path.resolve(__dirname, '../src/components'),
+      'moment': 'moment/min/moment.min.js',
+      'vue-router': 'vue-router/dist/vue-router.min.js',
+      'vue-resource': 'vue-resource/dist/vue-resource.min.js',
+      'vuex': 'vuex/dist/vuex.min.js',
+      'vux-src-components': 'vux/src/components',
+      'vux-components': 'vux/dist/components',
+      'vux-src-styles': 'vux/src/styles',
+      'vux-styles': 'vux/dist/styles'
     }
   },
   resolveLoader: {
     fallback: [path.join(__dirname, '../node_modules')]
   },
   module: {
+    noParse: [/moment.min/, /vue.min/, /vue-router.min/, /vue-resource.min/],
     preLoaders: [
       {
         test: /\.vue$/,
@@ -49,6 +71,10 @@ module.exports = {
         loader: 'babel',
         include: projectRoot,
         exclude: /node_modules/
+      },
+      {
+        test: /vux.src.*?js$/,
+        loader: 'babel'
       },
       {
         test: /\.json$/,

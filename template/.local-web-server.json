@@ -1,0 +1,23 @@
+{
+  "port": 8100,
+  "directory": ".\\dist",
+  "forbid": "*.json",
+  "rewrite": [
+    {
+      "from": "/backend",
+      "to": "http://niwodai-wm.echo58.com/backend"
+    },
+    {
+      "from": "/fake-login/*",
+      "to": "http://niwodai-wm.echo58.com/fake-login/$1"
+    },
+    {
+      "from": "/api/**",
+      "to": "http://niwodai-wm.echo58.com/api/$1"
+    },
+    {
+      "from": "/super-login/*",
+      "to": "http://weixin.niwodai.net/super-login/$1"
+    }
+  ]
+}
