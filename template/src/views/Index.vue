@@ -10,52 +10,13 @@
       <cell title="模拟登陆所给用户id" @click="fakeLogin(id)">
         <span class="iconfont icon-rank route-link" slot="icon"></span>
       </cell>
-      <cell title="模拟登陆005230" @click="fakeLogin('005230')">
-        <span class="iconfont icon-rank route-link" slot="icon"></span>
-      </cell>
-      <cell title="模拟登陆001228(有工资信息，1111)" @click="fakeLogin('001228')">
-        <span class="iconfont icon-rank route-link" slot="icon"></span>
-      </cell>
-      <cell title="模拟登陆030895(有请假记录;很多调休假)" @click="fakeLogin('030895')">
-        <span class="iconfont icon-rank route-link" slot="icon"></span>
-      </cell>
-      <cell title="模拟登陆000416(有正常有薪假)" @click="fakeLogin('000416')">
-        <span class="iconfont icon-rank route-link" slot="icon"></span>
-      </cell>
-      <cell title="清理cookies" @click="clearCookies">
-        <span class="iconfont icon-rank route-link" slot="icon"></span>
-      </cell>
-    </group>
-    <group title="文章访问">
-      <x-input title="文章type"
-               text-align="left"
-               placeholder="输入文章type"
-               type="tel"
-               :value.sync="article.type">
-      </x-input>
-      <x-input title="文章id"
-               text-align="left"
-               placeholder="输入文章id"
-               type="tel"
-               :value.sync="article.id">
-      </x-input>
-      <cell title="文章" @click="goArticle">
-        <span class="iconfont icon-rank route-link" slot="icon"></span>
-      </cell>
-      <cell title="教程" @click="this.routerGo('course')">
-        <span class="iconfont icon-rank route-link" slot="icon"></span>
-      </cell>
     </group>
     <group title="项目列表">
-      <cell :title="router.title" :link="router.testPath ? router.testPath : router.path" v-for="router in routers" v-if="showItem(router.title)">
-        <span class="iconfont icon-rank route-link" slot="icon"></span>
-      </cell>
-      <!--<cell title="考勤排行" link="/attendance/rank">-->
-        <!--<span class="iconfont icon-rank route-link" slot="icon"></span>-->
-      <!--</cell>-->
-      <cell title="考勤打卡" link="/attendance/check">
-        <span class="iconfont icon-rank route-link" slot="icon"></span>
-      </cell>
+      <template v-for="router in routers">
+        <cell :title="router.title" :link="router.testPath ? router.testPath : router.path" v-if="showItem(router.title)">
+          <span class="iconfont icon-rank route-link" slot="icon"></span>
+        </cell>
+      </template>
     </group>
   </div>
 </template>
@@ -96,9 +57,6 @@
       },
       showItem (title) {
         return !this.notShowItems.has(title)
-      },
-      goArticle () {
-        this.routerGo('article', {type: this.article.type, id: this.article.id})
       }
     }
   }

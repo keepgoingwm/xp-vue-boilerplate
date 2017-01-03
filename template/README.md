@@ -1,27 +1,11 @@
-# tpl1.0
+## 思路
 
-> A Vue.js project
+api的throttledHttp使用哪个版本有待确定
+api统一放到一个文件中
 
-## Build Setup
+## 使用
 
-``` bash
-# install dependencies
-npm install
+将env.js.example复制为同目录env.js，并设定其中必选参数，必选参数会有标识
 
-# serve with hot reload at localhost:8080
-npm run dev
+## 规则
 
-# build for production with minification
-npm run build
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

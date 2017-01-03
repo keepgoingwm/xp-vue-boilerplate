@@ -3,7 +3,7 @@ var path = require('path')
 var env = require('../env')
 var isProduction = (process.env.NODE_ENV === 'production')
 
-var backendUrl = env.backendUrl || 'http://niwodai-wm.echo58.com/'
+var backendUrl = env.backendUrl || 'http://example.com/'
 
 module.exports = {
   build: {
@@ -22,18 +22,18 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: env.devPort || 8082,
+    port: env.devPort || 8080,
     assetsSubDirectory: 'assets',
     assetsPublicPath: '/',
     proxyTable: {
-      '/fake-login/': {
-        filter: function (pathname, req) {
-          return (pathname.match('^/fake-login/') && req.method === 'GET')
-        },
-        logLevel: 'debug', //  ['debug', 'info', 'warn', 'error', 'silent']. Default: 'info'
-        target: backendUrl,
-        changeOrigin: true
-      }
+      // '/fake-login/': {
+      //   filter: function (pathname, req) {
+      //     return (pathname.match('^/fake-login/') && req.method === 'GET')
+      //   },
+      //   logLevel: 'debug', //  ['debug', 'info', 'warn', 'error', 'silent']. Default: 'info'
+      //   target: backendUrl,
+      //   changeOrigin: true
+      // }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

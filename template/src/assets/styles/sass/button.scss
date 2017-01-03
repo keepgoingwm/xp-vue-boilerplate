@@ -1,0 +1,45 @@
+.weui_btn {
+  border-radius: 3px;
+  &:after {
+    display: none;
+  }
+  + .weui_btn {
+    margin-top: 0;
+  }
+}
+
+$buttons: (primary: $primary, yellow: $yellow, green: $green, reject: $reject, orchid: $orchid, orange: #fdc22e, roseo: $roseo);
+@each $name, $color in $buttons {
+  .weui_btn_ {
+    &#{$name} {
+      background-color: $color;
+      &:not(.weui_btn_disabled):visited {
+        color: #fff;
+      }
+      &:not(.weui_btn_disabled):active {
+        color: rgba(255, 255, 255, 0.4);
+        background-color: shade($color, 20%);
+      }
+      &.weui_btn_disabled {
+        color: rgba(255, 255, 255, 0.4);
+        background-color: tint($color, 65%);
+        &:after {
+          display: none;
+        }
+      }
+    }
+    &plain_#{$name} {
+      color: $color;
+      border: 1px solid $color !important;
+      background-color: transparent;
+      &:not(.weui_btn_disabled):active {
+        border-color: shade($color, 20%);
+      }
+      &.weui_btn_disabled {
+        color: tint($color, 50%);
+        background-color: transparent;
+        border-color: tint($color, 65%) !important;
+      }
+    }
+  }
+}

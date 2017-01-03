@@ -1,0 +1,38 @@
+$colorTit: #433939;
+$colorTip: #A7A7A7;
+$colorBgDark: #696D74;
+
+// 替换variables设置
+$fontSize: 16px;
+$fontLineHeight: 1.3;
+// 基本颜色
+$thinRed: #fdf3f3;
+$primary: #49AFFF;
+$green: #1FC462;
+$orange: #FFBC1F;
+$yellow: #FFCF14;
+$blue: #40ACEE;
+$red: #FE6A6A;
+$walletBg: #0D293F; // 钱包背景
+$deepBule: #003447; // 深蓝 标签用
+$purple: #24174C; // 紫色
+$reject: #91969A; // reject按钮颜色
+$orchid: #0CB696; // 公示里用的兰绿色
+$roseo: #F55374; // 互助里用的玫红色
+// 背景色，文本色，边框色，链接色
+//-----------------------------------------------------
+$colorText: #595D60;
+$colorBg: #F6F6F6;
+$colorBorder: #E0E0E0;
+$colorLink: #00AAEF;
+$colorPlaceholder: #D2CECE; // input placeholder color
+// $colorDisabled: (text: #E4E4E4, bg: #e3e3e3, border: #D1D5DA); // textColor bgColor borderColor
+$colorDisabled: (text: #B6B2B2, bg: #e3e3e3, border: #E0E0E0); // textColor bgColor borderColor
+$colorOverlay: rgba(0,0,0,.6); // 遮罩层颜色
+// 元素上下间距
+//-----------------------------------------------------
+$gap: 15px;
+
+
+@import '~sass-sandal/function';
+@import './mixin';
