@@ -5,9 +5,9 @@
                text-align="left"
                placeholder="输入模拟用户id"
                type="tel"
-               :value.sync="id">
+               :value.sync="userId">
       </x-input>
-      <cell title="模拟登陆所给用户id" @click="fakeLogin(id)">
+      <cell title="模拟登陆所给用户id" @click="fakeLogin(userId)">
         <span class="iconfont icon-rank route-link" slot="icon"></span>
       </cell>
     </group>
@@ -31,19 +31,16 @@
     components: { Group, Cell, XInput },
     data () {
       return {
+        userId: '1',
         routers: window.appRouters,
-        notShowItems: new Set(['文章']),
-        article: {
-          type: '1',
-          id: '1'
-        }
+        notShowItems: new Set(['文章'])
       }
     },
     methods: {
-      fakeLogin (id) {
-        console.log(id)
+      fakeLogin (userId) {
+        console.log('模拟登陆用户' + userId)
         this.loading('请求中...')
-        Vue.http.get(`/fake-login/${id}`).then(() => {
+        Vue.http.get(`/fake-login/${userId}`).then(() => {
           this.loading(false)
           this.toast({ text: '模拟登陆成功', time: 500 })
           window.location.reload()

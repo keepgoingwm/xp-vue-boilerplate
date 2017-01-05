@@ -1,5 +1,7 @@
-export const defaultXhrErrorHandler = (response, options = {}) => {
-  let alertFunc = options.alertFunc || appAlert
+import { alert } from '../_self/appUtils'
+
+export const defaultHttpErrorHandler = (response, options = {}) => {
+  let alertFunc = options.alertFunc || alert
   let cb = options.cb
   let notJSONCb = options.notJSONCb
 
@@ -27,13 +29,4 @@ export const defaultXhrErrorHandler = (response, options = {}) => {
     alertFunc(JSON.stringify(response))
   }
   cb && cb(response)
-}
-
-export let appDispatch = (eventId, options) => {
-  router.app.$dispatch(eventId, options)
-}
-
-export let appAlert = (options) => {
-  options = typeof options === 'string' ? { title: options } : options
-  return appDispatch('alert', options || {})
 }

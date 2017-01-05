@@ -18,9 +18,9 @@ module.exports = {
     fallback: [path.join(__dirname, '../node_modules')],
     alias: isProduction ? {
       'src': path.resolve(__dirname, '../src'),
+      'libs': path.resolve(__dirname, '../src/libs'),
       'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components'),
-      'moment': 'moment/min/moment.min.js',
       'vue-router': 'vue-router/dist/vue-router.min.js',
       'vue-resource': 'vue-resource/dist/vue-resource.min.js',
       'vuex': 'vuex/dist/vuex.min.js',
@@ -30,9 +30,9 @@ module.exports = {
       'vux-styles': 'vux/dist/styles'
     } : {
       'src': path.resolve(__dirname, '../src'),
+      'libs': path.resolve(__dirname, '../src/libs'),
       'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components'),
-      'moment': 'moment/min/moment.min.js',
       'vue-router': 'vue-router/dist/vue-router.min.js',
       'vue-resource': 'vue-resource/dist/vue-resource.min.js',
       'vuex': 'vuex/dist/vuex.min.js',

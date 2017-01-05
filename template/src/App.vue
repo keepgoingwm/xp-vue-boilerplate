@@ -3,11 +3,15 @@
   <router-view class="view" keep-alive transition-mode="out-in"></router-view>
   <!-- hack在微信等webview中无法修改document.title的情况 -->
   <iframe id="iframe" style="display: none" src="/assets/static/iframe.html"></iframe>
-  <loading :show="loading.show" :text="loading.text" v-if="loading.show"></loading>
-  <loading :show="routeLoading.show" :text="routeLoading.text" v-if="routeLoading.show"></loading>
+  <loading :show="loading.show"
+           :text="loading.text"
+           :class="{'white-screen': loading.whiteScreen}"
+           v-if="loading.show">
+  </loading>
   <toast :show.sync="toast.show"
          :type="toast.type"
          :time="toast.time"
+         :class="{'white-screen': toast.whiteScreen}"
          mask-transition=""
          dialog-transition=""
          :width="toast.text.length > 7 ? '18em' : null">
@@ -57,7 +61,8 @@ export default {
     return {
       loading: {
         show: false,
-        text: ''
+        text: '',
+        whiteScreen: false
       },
       routeLoading: {
         show: false,
@@ -66,6 +71,7 @@ export default {
       toast: {
         show: false,
         type: 'text',
+        whiteScreen: false,
         time: null,
         text: '',
         callback: emptyFunc
@@ -106,8 +112,8 @@ export default {
     }
   },
   events: {
-    loading ({ show = true, text = '加载中...' }) {
-      this.loading = {show, text}
+    loading ({ show = true, text = '加载中...', whiteScreen = false }) {
+      this.loading = { show, text, whiteScreen }
     },
     toast ({ show = true, type = 'text', time = 2000, text = '', callback = emptyFunc }) {
       this.toast = { show, type, time, text, callback }
@@ -160,6 +166,15 @@ export default {
       .weui_dialog {
         top: 45%;
       }
+    }
+    .white-screen {
+      position: fixed;
+      z-index: 5001;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: #fff;
     }
   }
   * {

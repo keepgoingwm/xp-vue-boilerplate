@@ -25,15 +25,17 @@ module.exports = {
     port: env.devPort || 8080,
     assetsSubDirectory: 'assets',
     assetsPublicPath: '/',
+    // proxy使用参考https://github.com/chimurai/http-proxy-middleware
+    // 通过path可以传入非字符串类型的path matching规则，这样就能完全发挥http-proxy-middleware原本的匹配能力
     proxyTable: {
-      // '/fake-login/': {
-      //   filter: function (pathname, req) {
-      //     return (pathname.match('^/fake-login/') && req.method === 'GET')
-      //   },
-      //   logLevel: 'debug', //  ['debug', 'info', 'warn', 'error', 'silent']. Default: 'info'
-      //   target: backendUrl,
-      //   changeOrigin: true
-      // }
+      '/fake-login/': {
+        // path: function (pathname, req) {
+        //   return (pathname.match('^/fake-login/') && req.method === 'GET')
+        // },
+        logLevel: 'debug', //  ['debug', 'info', 'warn', 'error', 'silent']. Default: 'info'
+        target: backendUrl,
+        changeOrigin: true
+      }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

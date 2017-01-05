@@ -1,11 +1,9 @@
-import Index from './views/Index.vue'
-
 export default function Routers (router) {
   if (process.env.NODE_ENV !== 'production') {
     router.map({
       '/': {
         name: 'index',
-        component: Index,
+        component: require('./views/_dev/Index.vue'),
         title: '首页',
         noNeedWxAuth: true,   // 不需要微信登录
         noNeedWxJsSdK: true         // 不需要配置jsSdk
