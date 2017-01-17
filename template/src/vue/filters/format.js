@@ -75,14 +75,14 @@ export default {
       return timeObj.format('YYYY年M月D日')
     }
   },
-  friendlyText (val, defaultText, ...params) {
+  friendlyText (val, defaultText, ...keys) {
     defaultText = defaultText || '无'
 
     if (!val) {
       return defaultText
     }
 
-    if (params.length === 0) {
+    if (keys.length === 0) {
       if (val.length === 0) {
         return defaultText
       } else {
@@ -90,8 +90,10 @@ export default {
       }
     } else {
       var res = ''
-      params.forEach((key) => {
-        res += (' ' + val[key])
+      keys.forEach((key) => {
+        if (val[key]) {
+          res += (' ' + val[key])
+        }
       })
 
       if (res.trim().length === 0) {

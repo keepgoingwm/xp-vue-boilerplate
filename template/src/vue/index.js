@@ -10,7 +10,6 @@ let installVueGlobalApi = (Vue) => {
     Vue.directive(k, Directives[k])
   })
   Object.keys(Mixins).forEach(k => {
-    console.log(Mixins[k])
     Vue.mixin(Mixins[k])
   })
 }

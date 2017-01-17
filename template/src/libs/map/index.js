@@ -6,19 +6,56 @@ export default class Map {
     this.zoom = zoom
     this.mapOptions = mapOptions
 
-    let lat = this.center.lat
-    let lng = this.center.lng
-    if (lat !== '' && lng !== '') {
-      this.centerLatLng = new qq.maps.LatLng(lat, lng)
-    } else {
-      throw new Error('wrong center lat or lng')
-    }
+    this.createMap()
+  }
 
-    this.map = null
-    this.latlngBounds = new qq.maps.LatLngBounds()
+  static getLatLng (location) {
+    if (!location || !location.lat || !location.lng) {
+      console.log(location)
+      throw new Error('wrong location')
+    } else {
+      let lat = location.lat
+      let lng = location.lng
+      return new qq.maps.LatLng(lat, lng)
+    }
+  }
+
+  static getSize (size) {
+    if (size) {
+      return new qq.maps.Size(size[0], size[1])
+    } else {
+      return null
+      // throw new Error('wrong size')
+    }
+  }
+
+  static getPoint (point) {
+    if (point) {
+      return new qq.maps.Point(point[0], point[1])
+    } else {
+      return null
+      // throw new Error('wrong point')
+    }
+  }
+
+  static getMarkerImage (icon) {
+    if (typeof icon === 'string') {
+      return new qq.maps.MarkerImage(icon)
+    } else {
+      let url = icon.url
+      let size = Map.getSize(icon.size)
+      let scaleSize = Map.getSize(icon.scaleSize)
+      let origin = Map.getPoint(icon.origin)
+      let anchor = Map.getPoint(icon.anchor)
+      let shadowAngle = icon.shadowAngle
+      return new qq.maps.MarkerImage(url, size, scaleSize, origin, anchor, shadowAngle)
+    }
   }
 
   createMap () {
+    this.map = null
+    this.latlngBounds = new qq.maps.LatLngBounds()
+
     let mapConfig = {
       center: this.centerLatLng,
       mapTypeId: qq.maps.MapTypeId[this.mapTypeId],
@@ -32,33 +69,33 @@ export default class Map {
   }
 
   getCenter () {
-    return this.centerLatLng
+    return this.center
+  }
+
+  get centerLatLng () {
+    return Map.getLatLng(this.center)
+  }
+
+  setCenter (center) {
+    if (center.lat === this.center.lat && center.lng === this.center.lng) {
+      return
+    }
+    this.center = center
+    this.map.setCenter(this.centerLatLng)
   }
 
   addMarkers (positions, markerImages, onclick) {
     this.markers = []
-    this.markersInfoWin = []
+    this.markersInfoWindow = []
     positions.forEach((position, index) => {
       let marker = this.addMarker(position, markerImages[index], onclick)
       this.markers.push(marker)
     })
   }
 
-  addMarker (position, markerImage, onclick, options) {
-    let latLng = position ? new qq.maps.LatLng(position.lat, position.lng) : this.centerLatLng
-    if (markerImage.size) {
-      markerImage.size = new qq.maps.Size(markerImage.size[0], markerImage.size[1])
-    }
-    if (markerImage.scaleSize) {
-      markerImage.scaleSize = new qq.maps.Size(markerImage.scaleSize[0], markerImage.scaleSize[1])
-    }
-    if (markerImage.origin) {
-      markerImage.origin = new qq.maps.Point(markerImage.origin[0], markerImage.origin[1])
-    }
-    if (markerImage.anchor) {
-      markerImage.anchor = new qq.maps.Point(markerImage.anchor[0], markerImage.anchor[1])
-    }
-    let icon = new qq.maps.MarkerImage(markerImage.url, markerImage.size, markerImage.origin, markerImage.anchor, markerImage.scaleSize, markerImage.shadowAngle)
+  addMarker (position, icon, options) {
+    let latLng = position ? Map.getLatLng(position) : this.centerLatLng
+    let markerImage = Map.getMarkerImage(icon)
 
     let markerShape = null
     if (options && options.markerShape) {
@@ -68,12 +105,11 @@ export default class Map {
     let marker = new qq.maps.Marker({
       position: latLng,
       title: '',
-      icon: icon,
+      icon: markerImage,
       map: this.map,
       markerShape: markerShape
     })
-    this.latlngBounds.extend(latLng)
-    // var infoWin = addMarkersInfoWin(marker, `<div style='font-size: small;'>可选网点：${info.name}</div>`)
+    // var infoWin = addMarkersInfoWindow(marker, `<div style='font-size: small;'>可选网点：${info.name}</div>`)
     // if (onclick && (typeof onclick === 'function')) {
     //   qq.maps.event.addListener(marker, 'click', () => {
     //     onclick()
@@ -83,12 +119,11 @@ export default class Map {
   }
 
   setMarkerPosition (marker, position) {
-    let latLng = new qq.maps.LatLng(position.lat, position.lng)
-    this.latlngBounds.extend(latLng)
+    let latLng = Map.getLatLng(position)
     marker.setPosition(latLng)
   }
 
-  addMarkersInfoWin (marker, content) {
+  addMarkersInfoWindow (marker, content) {
     let infoWin = new qq.maps.InfoWindow({
       map: this.map
     })
@@ -106,21 +141,13 @@ export default class Map {
   }
 
   fitBounds () {
+    this.markers.forEach((ele) => {
+      this.latlngBounds.extend(ele.getPosition())
+    })
     if (!this.latlngBounds.isEmpty()) {
       this.map.fitBounds(this.latlngBounds)
     }
     this.map.setCenter(this.centerLatLng)
-  }
-
-  // zoom前最好将bounds清掉,否则效果可能并不是预期的
-  zoomToMetre (metre) {
-    let computeOffset = qq.maps.geometry.spherical.computeOffset
-    this.latlngBounds.extend(computeOffset(this.centerLatLng, metre, -90))
-    this.latlngBounds.extend(computeOffset(this.centerLatLng, metre, 90))
-    this.latlngBounds.extend(computeOffset(this.centerLatLng, metre, 0))
-    this.latlngBounds.extend(computeOffset(this.centerLatLng, metre, 180))
-
-    this.fitBounds()
   }
 
   addCircle (center, radius, options) {
@@ -149,5 +176,17 @@ export default class Map {
     })
 
     return circle
+  }
+
+  getCircleCenter (circle) {
+    return circle.getCenter()
+  }
+
+  setCircleCenter (circle, center) {
+    circle.setCenter(Map.getLatLng(center))
+  }
+
+  setCircleRadius (circle, radius) {
+    circle.setRadius(radius)
   }
 }

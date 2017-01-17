@@ -23,12 +23,12 @@ export default {
     },
     methods: Object.assign(
       {
-        // routerGo (name, params, query) {
-        //   return router.go({ name: name, params: params, query: query })
-        // },
-        // routerReplace (name, params, query) {
-        //   return router.replace({ name: name, params: params, query: query })
-        // },
+        routerGo (name, params, query) {
+          return router.go({ name: name, params: params, query: query })
+        },
+        routerReplace (name, params, query) {
+          return router.replace({ name: name, params: params, query: query })
+        },
         setHeadTitle (title) {
           document.title = title
           // hack在微信等webview中无法修改document.title的情况

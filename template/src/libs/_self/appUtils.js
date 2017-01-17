@@ -33,3 +33,7 @@ exports.topTip = (opts) => {
   opts = typeof opts === 'string' ? { text: opts } : opts
   return dispatchFunc('topTip', opts || {})
 }
+
+exports.getRoutePath = (name) => {
+  return router._recognizer.names[name] && router._recognizer.names[name].handlers[handlers.length - 1].handler.fullPath
+}

@@ -7,6 +7,13 @@ export default function Routers (router) {
         title: '首页',
         noNeedWxAuth: true,   // 不需要微信登录
         noNeedWxJsSdK: true         // 不需要配置jsSdk
+      },
+      '/life-cycle': {
+        name: 'life-cycle',
+        component: require('./views/_dev/test/LifeCycle.vue'),
+        title: '生命周期顺序',
+        noNeedWxAuth: true,   // 不需要微信登录
+        noNeedWxJsSdK: true         // 不需要配置jsSdk
       }
     })
   }

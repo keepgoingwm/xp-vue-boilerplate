@@ -5,10 +5,14 @@ import global from './modules/global'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  strict: true,
+const debug = process.env.NODE_ENV !== 'production'
+const options = {
+  strict: debug,
   modules: {
     global,
     setting
   }
-})
+}
+window.vuexOptions = options
+
+export default new Vuex.Store(options)

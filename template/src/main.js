@@ -1,4 +1,5 @@
-import Vue from 'vue'
+import Vue from 'E:\\02Project\\MyGitHub\\vue\\dist\\vue.js'
+// import Vue from 'vue'
 
 if (process.env.NODE_ENV !== 'production') {
   // 开发、测试过程需要的

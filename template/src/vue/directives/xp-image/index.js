@@ -179,57 +179,59 @@ export let xpImage = {
     let styleHeight = val.styleHeight
     let styleMaxWidth = val.styleMaxWidth
     let styleMaxHeight = val.styleMaxHeight
+    val.realStyleWidth = null
+    val.realStyleHeight = null
+    let computedWidth = null
+    let computedHeight = null
 
     if (originWidth && originHeight) {
-      val.realStyleWidth = null
-      val.realStyleHeight = null
       if (styleMaxWidth || styleMaxHeight) {
         let wRatio = styleMaxWidth ? originWidth / styleMaxWidth : 0
         let hRatio = styleMaxHeight ? originHeight / styleMaxHeight : 0
 
         if (wRatio < 1 && hRatio < 1) {
-          val.realStyleWidth = originWidth
-          val.realStyleHeight = originHeight
+          computedWidth = originWidth
+          computedHeight = originHeight
         } else {
           switch (imageViewMode) {
             // 规定最大值，等比缩放，不裁剪
             case 0:
               if (wRatio > hRatio) {
-                val.realStyleWidth = styleMaxWidth
-                val.realStyleHeight = originHeight * (styleMaxWidth / originWidth)
+                computedWidth = styleMaxWidth
+                computedHeight = originHeight * (styleMaxWidth / originWidth)
               } else {
-                val.realStyleHeight = styleMaxHeight
-                val.realStyleWidth = originWidth * (styleMaxHeight / originHeight)
+                computedHeight = styleMaxHeight
+                computedWidth = originWidth * (styleMaxHeight / originHeight)
               }
               break
             // 规定最小值，等比缩放，居中裁剪
             case 1:
               if (wRatio > 0 && hRatio > 0) {
-                val.realStyleWidth = styleMaxWidth
-                val.realStyleHeight = styleMaxHeight
+                computedWidth = styleMaxWidth
+                computedHeight = styleMaxHeight
               } else {
                 if (wRatio > 0) {
-                  val.realStyleWidth = styleMaxWidth
-                  val.realStyleHeight = styleMaxWidth
+                  computedWidth = styleMaxWidth
+                  computedHeight = styleMaxWidth
                 } else {
-                  val.realStyleWidth = styleMaxHeight
-                  val.realStyleHeight = styleMaxHeight
+                  computedWidth = styleMaxHeight
+                  computedHeight = styleMaxHeight
                 }
               }
               break
             default:
               if (wRatio > hRatio) {
-                val.realStyleWidth = styleMaxWidth
-                val.realStyleHeight = originHeight * (styleMaxWidth / originWidth)
+                computedWidth = styleMaxWidth
+                computedHeight = originHeight * (styleMaxWidth / originWidth)
               } else {
-                val.realStyleHeight = styleMaxHeight
-                val.realStyleWidth = originWidth * (styleMaxHeight / originHeight)
+                computedHeight = styleMaxHeight
+                computedWidth = originWidth * (styleMaxHeight / originHeight)
               }
           }
         }
       } else {
-        val.realStyleWidth = originWidth
-        val.realStyleHeight = originHeight
+        computedWidth = originWidth
+        computedHeight = originHeight
       }
 
       if (!styleWidth) {
@@ -240,19 +242,13 @@ export let xpImage = {
       }
     }
 
-    if (styleMaxWidth) {
-      this.el.setAttribute('style', extendStyle(this.el.getAttribute('style'), `max-width: ${styleMaxWidth}px`))
-    }
-    if (styleMaxHeight) {
-      this.el.setAttribute('style', extendStyle(this.el.getAttribute('style'), `max-height: ${styleMaxHeight}px`))
-    }
+    val.realStyleWidth = styleWidth !== undefined ? styleWidth : computedWidth
+    val.realStyleHeight = styleHeight !== undefined ? styleHeight : computedHeight
 
-    if (styleWidth) {
-      this.el.setAttribute('style', extendStyle(this.el.getAttribute('style'), `width: ${styleWidth}px`))
-    }
-    if (styleHeight) {
-      this.el.setAttribute('style', extendStyle(this.el.getAttribute('style'), `height: ${styleHeight}px`))
-    }
+    val.realStyleWidth && this.el.setAttribute('style', extendStyle(this.el.getAttribute('style'), `height: ${val.realStyleHeight}px`))
+    val.realStyleHeight && this.el.setAttribute('style', extendStyle(this.el.getAttribute('style'), `width: ${val.realStyleWidth}px`))
+    styleMaxWidth && this.el.setAttribute('style', extendStyle(this.el.getAttribute('style'), `max-width: ${styleMaxWidth}px`))
+    styleMaxHeight && this.el.setAttribute('style', extendStyle(this.el.getAttribute('style'), `max-height: ${styleMaxHeight}px`))
   },
   setUrl (val) {
     let imageViewMode = val.imageViewMode
@@ -333,8 +329,8 @@ export let xpImage = {
         this.el.setAttribute('src', defaultImage || options.defaultImageUrl)
       } else {
         this.el.setAttribute('style', extendStyle(
-            this.el.getAttribute('style'),
-            `background-image: url(${defaultImage || options.defaultImageUrl})`
+          this.el.getAttribute('style'),
+          `background-image: url(${defaultImage || options.defaultImageUrl})`
           )
         )
       }

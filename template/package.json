@@ -9,6 +9,7 @@
     "build": "node build/build.js && webpack-bundle-size-analyzer profile/packStats.json",
     "test": "",
     "lint": "eslint --ext .js,.vue src",
+    "install-hook": "ln -s ../../build/git-hooks/pre-commit .git/hooks/pre-commit",
     "server": "ws"
   },
   "dependencies": {

@@ -11,6 +11,11 @@
         <span class="iconfont icon-rank route-link" slot="icon"></span>
       </cell>
     </group>
+    <group title="测试">
+      <cell title="生命周期顺序" @click="routerGo('life-cycle')">
+        <span class="iconfont icon-rank route-link" slot="icon"></span>
+      </cell>
+    </group>
     <group title="项目列表">
       <template v-for="router in routers">
         <cell :title="router.title" :link="router.testPath ? router.testPath : router.path" v-if="showItem(router.title)">
