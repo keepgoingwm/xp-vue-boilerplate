@@ -26,7 +26,8 @@ module.exports = {
       'vue$': 'vue/dist/vue.common.js',
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
-      'components': path.resolve(__dirname, '../src/components')
+      'components': path.resolve(__dirname, '../src/components'),
+      'moment': 'moment/min/moment.min.js'
     }
   },
   resolveLoader: {
@@ -84,7 +85,8 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
-    ]
+    ],
+    noParse: [/moment/]
   },
   eslint: {
     formatter: require('eslint-friendly-formatter')

@@ -1,0 +1,15 @@
+{
+  "port": 8100,
+  "directory": ".\\dist",
+  "forbid": "*.json",
+  "rewrite": [
+    {
+      "from": "/backend",
+      "to": "http://niwodai-wm.echo58.com/backend"
+    },
+    {
+      "from": "/api/**",
+      "to": "http://niwodai-wm.echo58.com/api/$1"
+    }
+  ]
+}

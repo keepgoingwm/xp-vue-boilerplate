@@ -18,5 +18,16 @@ module.exports = {
     'generator-star-spacing': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+  },
+  'globals': {
+    '_': true,
+    'wx': true,
+    'router': true,
+    'history': true,
+    'localStorage': true,
+    'alert': true,
+    'location': true,
+    'Moment': true,
+    'firstHref': true
   }
 }

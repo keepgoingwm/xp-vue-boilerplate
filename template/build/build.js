@@ -1,6 +1,7 @@
 // https://github.com/shelljs/shelljs
 require('./check-versions')()
 require('shelljs/global')
+var fs = require('fs')
 env.NODE_ENV = 'production'
 
 var path = require('path')
@@ -33,4 +34,5 @@ webpack(webpackConfig, function (err, stats) {
     chunks: false,
     chunkModules: false
   }) + '\n')
+  fs.writeFileSync('profile/packStats.json', JSON.stringify(stats.toJson()))
 })
