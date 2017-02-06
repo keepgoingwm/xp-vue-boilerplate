@@ -1,11 +1,19 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App'
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  template: '<App/>',
-  components: { App }
-})
+// const isBuild = (process.env.NODE_ENV !== 'development')
+
+import 'vux/src/styles/1px.less'
+import './assets/styles/sass/index.scss'
+
+import installCommonLibs from './installCommonLibs'
+installCommonLibs(Vue)
+
+import installVueGlobalApi from './vue-extend/index'
+installVueGlobalApi(Vue)
+
+import installResource from './installResource'
+installResource(Vue)
+
+import installRouter from './installRouter'
+installRouter(Vue)
+

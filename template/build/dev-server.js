@@ -1,12 +1,17 @@
 require('./check-versions')()
 var config = require('../config')
 if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
+var fs = require('fs')
 var path = require('path')
 var express = require('express')
+var http = require('http')
+var https = require('https')
 var webpack = require('webpack')
 var opn = require('opn')
 var proxyMiddleware = require('http-proxy-middleware')
-var webpackConfig = require('./webpack.dev.conf')
+var webpackConfig = process.env.NODE_ENV === 'testing'
+  ? require('./webpack.prod.conf')
+  : require('./webpack.dev.conf')
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
@@ -19,7 +24,10 @@ var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
-  quiet: true
+  stats: {
+    colors: true,
+    chunks: false
+  }
 })
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
@@ -38,6 +46,12 @@ Object.keys(proxyTable).forEach(function (context) {
   var options = proxyTable[context]
   if (typeof options === 'string') {
     options = { target: options }
+  }
+  if (typeof options.filter === 'function') {
+    context = options.filter
+  }
+  if (options.path) {
+    context = options.path
   }
   app.use(proxyMiddleware(context, options))
 })

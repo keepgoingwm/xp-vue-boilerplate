@@ -13,8 +13,12 @@
     "install-hook": "ln -s ../../build/git-hooks/pre-commit .git/hooks/pre-commit"
   },
   "dependencies": {
+    "babel-polyfill": "^6.22.0",
+    "decimal.js": "^7.1.1",
     "lodash": "^4.17.4",
-    "vue": "^2.1.0"
+    "moment": "^2.17.1",
+    "vue": "^2.1.0",
+    "vue-router": "^2.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

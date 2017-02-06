@@ -3,11 +3,11 @@ var config = require('../config')
 var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
 
-var env = process.env.NODE_ENV
+var isBuild = (process.env.NODE_ENV !== undefined)
 // check env & config/index.js to decide whether to enable CSS source maps for the
 // various preprocessor loaders added to vue-loader at the end of this file
-var cssSourceMapDev = (env === 'development' && config.dev.cssSourceMap)
-var cssSourceMapProd = (env === 'production' && config.build.productionSourceMap)
+var cssSourceMapDev = (process.env.NODE_ENV === 'development' && config.dev.cssSourceMap)
+var cssSourceMapProd = (process.env.NODE_ENV === 'production' && config.build.productionSourceMap)
 var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
 
 module.exports = {
@@ -16,7 +16,7 @@ module.exports = {
   },
   output: {
     path: config.build.assetsRoot,
-    publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
+    publicPath: isBuild ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
     filename: '[name].js'
   },
   resolve: {
@@ -64,6 +64,10 @@ module.exports = {
           path.join(projectRoot, 'src')
         ],
         exclude: /node_modules/
+      },
+      {
+        test: /vux.src.*?js$/,
+        loader: 'babel'
       },
       {
         test: /\.json$/,

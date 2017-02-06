@@ -1,8 +1,7 @@
 // https://github.com/shelljs/shelljs
-require('./check-versions')()
 require('shelljs/global')
 var fs = require('fs')
-env.NODE_ENV = 'production'
+env.NODE_ENV = 'testing'
 
 var path = require('path')
 var config = require('../config')
@@ -16,19 +15,19 @@ console.log(
   '  Opening index.html over file:// won\'t work.\n'
 )
 
-var spinner = ora('building for production...')
+var spinner = ora('building for test...')
 spinner.start()
 
 var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirectory)
 rm('-rf', assetsPath)
 mkdir('-p', assetsPath)
-cp('-R', 'static/*', assetsPath)
+cp('-R', 'static/', assetsPath)
 
 webpack(webpackConfig, function (err, stats) {
   spinner.stop()
   if (err) throw err
   process.stdout.write(stats.toString({
-      // contex: false,
+      // context: false,
       // hash: false,
       // version: false,
       timings: true,
