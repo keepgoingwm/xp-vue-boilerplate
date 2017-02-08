@@ -5,10 +5,7 @@
   "env": {
     "test": {
       "plugins": [
-        "istanbul" ,
-        {
-          "name": "vux-ui"
-        }
+        "istanbul" 
       ]
     }
   }
