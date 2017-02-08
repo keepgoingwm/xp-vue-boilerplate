@@ -1,5 +1,5 @@
-import VueMixins from '../../vue/mixins'
-import Api from '../../api/niwodai'
+import VueMixins from '../vue-extend/mixins'
+import Api from '../api/index'
 
 // 待优化： 刷新过程倒计时停止；刷新后倒计时依然显示
 

@@ -1,5 +1,3 @@
-import { isEmptyObject } from '../../libs/jsExtend'
-
 export default {
   data () {
     return {
@@ -8,7 +6,7 @@ export default {
   },
   compiled () {
     setInterval(() => {
-      if (isEmptyObject(this.setting)) {
+      if (_.isEmpty(this.setting)) {
         this.backendTime = null
       } else {
         this.backendTime = Moment().add(this.setting.diffTime, 'ms').format('YYYY-MM-DD HH:mm:ss')

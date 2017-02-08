@@ -1,4 +1,4 @@
-import ScrollRecord from '../../libs/scrollRecord/index'
+import ScrollRecord from '../../utils/scroll-record/index'
 import uuid from './uuid'
 
 export default {

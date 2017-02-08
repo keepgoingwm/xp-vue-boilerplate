@@ -1,8 +1,4 @@
 import formatFilters from './filters/format'
-// import * as emojiFilters from './filters/emoji'
-import * as htmlEntitiesFilters from './filters/html-entityies'
-import * as wxEmotionsFilters from './filters/wx-emotions'
-import * as linebreakFilters from './filters/linebreak'
 
 export default Object.assign(
   {
@@ -44,10 +40,6 @@ export default Object.assign(
       }
     }
   },
-  formatFilters,
-  // emojiFilters,
-  htmlEntitiesFilters,
-  wxEmotionsFilters,
-  linebreakFilters
+  formatFilters
 )
 
