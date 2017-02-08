@@ -9,7 +9,7 @@
     },
     {
       "from": "/api/**",
-      "to": "http://niwodai-wm.echo58.com/api/$1"
+      "to": "http://example.com/api/$1"
     }
   ]
 }

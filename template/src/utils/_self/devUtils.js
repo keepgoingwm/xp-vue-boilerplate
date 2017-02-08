@@ -8,11 +8,11 @@ var installDevUtils = function (options) {
   window.vueGlobalComponents = Vue.options.components
   window.vueGlobalElComponents = Vue.options.elementDirectives
   window.vueGlobalMethods = Vue.options.methods
-  window.vueGlobalFilters= Vue.options.filters
+  window.vueGlobalFilters = Vue.options.filters
   window.vueGlobalDirectives = Vue.options.directives
   window.vuexGlobalGetters = Vue.options.vuex && Vue.options.vuex.getters
 
-  window.store = require('../../vuex/store')
+  window.store = require('../../store/index')
   window.state = window.store.default.state
 
   // 开启微信jssdk debug

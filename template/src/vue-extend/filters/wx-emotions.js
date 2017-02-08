@@ -1,4 +1,4 @@
-import WxEmotions from '../../libs/wx-emotions/index'
+import WxEmotions from '../../utils/wx-emotions/index'
 var WE = new WxEmotions()
 
 export let wxEmotions = (message) => {

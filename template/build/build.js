@@ -24,30 +24,32 @@ rm('-rf', assetsPath)
 mkdir('-p', assetsPath)
 cp('-R', 'static/*', assetsPath)
 
+var statsConfig = {
+  // contex: false,
+  // hash: false,
+  // version: false,
+  timings: true,
+  // assets: false,
+  // cached: false,
+  // reasons: false,
+  // source: false,
+  // errorDetails: false,
+  // chunkOrigins : false,
+  // modulesSort: false,
+  // chunksSort : false,
+  // assetsSort : false,
+  colors: true,
+  modules: false,
+  children: false,
+  chunks: false,
+  chunkModules: false
+}
+
 webpack(webpackConfig, function (err, stats) {
   spinner.stop()
   if (err) throw err
-  process.stdout.write(stats.toString({
-      // contex: false,
-      // hash: false,
-      // version: false,
-      timings: true,
-      // assets: false,
-      // cached: false,
-      // reasons: false,
-      // source: false,
-      // errorDetails: false,
-      // chunkOrigins : false,
-      // modulesSort: false,
-      // chunksSort : false,
-      // assetsSort : false,
-      colors: true,
-      modules: false,
-      children: false,
-      chunks: false,
-      chunkModules: false
-    }) + '\n')
+  process.stdout.write(stats.toString(statsConfig) + '\n')
   if (config.build.packStats) {
-    fs.writeFileSync(config.build.packStats, JSON.stringify(stats.toJson()))
+    fs.writeFileSync(config.build.packStats, JSON.stringify(stats.toJson(statsConfig)))
   }
 })

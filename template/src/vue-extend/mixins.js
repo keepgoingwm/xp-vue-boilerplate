@@ -1,10 +1,10 @@
 // import global from './mixins/global'
-import apiUtils from '../libs/_self/apiUtils'
-import appUtils from '../libs/_self/appUtils'
+import apiUtils from '../utils/_self/apiUtils'
+import appUtils from '../utils/_self/appUtils'
 // import data from './mixins/data'
 // import throttledExec from './mixins/throttedExec'
 
-import { global, setting } from 'src/vuex/getters'
+import { global, setting } from 'src/store/getters'
 
 export default {
   // data,

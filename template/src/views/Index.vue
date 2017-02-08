@@ -2,25 +2,21 @@
 <div>
   <group title="调试辅助">
     <x-input title="用户id"
-             text-align="left"
+             text-align="right"
              placeholder="输入模拟用户id"
-             type="tel"
-             :value.sync="id">
+             v-model="id">
     </x-input>
-    <cell title="模拟登陆所给用户id" @click="fakeLogin(id)">
+    <cell title="模拟登陆所给用户id" @click="fakeLogin(id)" is-link>
       <span class="iconfont icon-rank route-link" slot="icon"></span>
     </cell>
-    <cell title="清理cookies" @click="clearCookies">
+    <cell title="清理cookies" @click="clearCookies" is-link>
       <span class="iconfont icon-rank route-link" slot="icon"></span>
     </cell>
-    <cell title="组件" @click="this.routerGo('components')">
+    <cell title="组件" @click="this.routerGo('components')" is-link>
       <span class="iconfont icon-rank route-link" slot="icon"></span>
     </cell>
   </group>
   <group title="项目列表">
-    <cell title="个人中心" link="/member/center">
-      <span class="iconfont icon-rank route-link" slot="icon"></span>
-    </cell>
     <!--第一级路由可自动生成-->
     <cell :title="router.title" :link="router.testPath ? router.testPath : router.path" v-for="router in routers" v-if="showItem(router.title)">
       <span class="iconfont icon-rank route-link" slot="icon"></span>
@@ -31,14 +27,13 @@
 
 <script type="text/ecmascript-6">
 import Vue from 'vue'
-import Group from 'vux-src-components/group'
-import Cell from 'vux-src-components/cell'
-import XInput from 'vux-src-components/x-input'
+import { Group, Cell, XInput } from 'vux'
 
 export default {
   components: { Group, Cell, XInput },
   data () {
     return {
+      id: '1',
       routers: window.appRouters,
       notShowItems: new Set(['文章']),
       article: {

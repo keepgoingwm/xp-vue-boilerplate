@@ -10,7 +10,7 @@ var cssSourceMapDev = (process.env.NODE_ENV === 'development' && config.dev.cssS
 var cssSourceMapProd = (process.env.NODE_ENV === 'production' && config.build.productionSourceMap)
 var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
 
-module.exports = {
+var webpackConfig = {
   entry: {
     app: './src/main.js'
   },
@@ -27,7 +27,8 @@ module.exports = {
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components'),
-      'moment': 'moment/min/moment.min.js'
+      'moment': 'moment/min/moment.min.js',
+      'vux-src-components': 'vux/src/components'
     }
   },
   resolveLoader: {
@@ -104,3 +105,16 @@ module.exports = {
     ]
   }
 }
+
+var vuxLoader = require('vux-loader')
+module.exports = vuxLoader.merge(webpackConfig, {
+  options: {},
+  plugins: [
+    {
+      name: 'vux-ui'
+    },
+    {
+      name: 'duplicate-style'
+    }
+  ]
+})

@@ -1,17 +1,14 @@
 require('./check-versions')()
-var config = require('../config')
-if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
-var fs = require('fs')
 var path = require('path')
 var express = require('express')
-var http = require('http')
-var https = require('https')
 var webpack = require('webpack')
 var opn = require('opn')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = process.env.NODE_ENV === 'testing'
   ? require('./webpack.prod.conf')
   : require('./webpack.dev.conf')
+var config = require('../config')
+if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port

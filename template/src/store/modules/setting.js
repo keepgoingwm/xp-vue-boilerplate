@@ -18,12 +18,12 @@ function versions () {
   }
 }
 
-let payUrlReg = new RegExp(`^${location.origin}/#/member/wallet/[^\/]*$`)
+// let payUrlReg = new RegExp(`^${location.origin}/#/member/wallet/[^/]*$`)
 
 const state = {
   config: {},
   base: {
-    notPayUrl: !payUrlReg.test(firstHref),
+    // notPayUrl: !payUrlReg.test(firstHref),
     versions: versions()
   }
 }

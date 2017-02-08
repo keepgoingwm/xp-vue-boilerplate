@@ -17,8 +17,12 @@
     "decimal.js": "^7.1.1",
     "lodash": "^4.17.4",
     "moment": "^2.17.1",
+    "vconsole": "^2.5.2",
     "vue": "^2.1.0",
-    "vue-router": "^2.2.0"
+    "vue-resource": "^1.2.0",
+    "vue-router": "^2.2.0",
+    "vuex": "^2.1.2",
+    "vux": "^2.1.0-rc.28"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
@@ -48,20 +52,27 @@
     "html-webpack-plugin": "^2.8.1",
     "http-proxy-middleware": "^0.17.2",
     "json-loader": "^0.5.4",
+    "less": "^2.7.2",
+    "less-loader": "^2.2.3",
     "mockjs": "^1.0.1-beta3",
+    "node-sass": "^4.5.0",
     "opn": "^4.0.2",
     "ora": "^0.3.0",
+    "sass-loader": "^5.0.0",
+    "sass-sandal": "^3.3.1",
     "semver": "^5.3.0",
     "shelljs": "^0.7.4",
     "url-loader": "^0.5.7",
     "vue-loader": "^10.0.0",
     "vue-style-loader": "^1.0.0",
     "vue-template-compiler": "^2.1.0",
+    "vux-loader": "^1.0.35",
     "webpack": "^1.13.2",
     "webpack-bundle-size-analyzer": "^2.5.0",
     "webpack-dev-middleware": "^1.8.3",
     "webpack-hot-middleware": "^2.12.2",
-    "webpack-merge": "^0.14.1"
+    "webpack-merge": "^0.14.1",
+    "yaml-loader": "^0.4.0"
   },
   "engines": {
     "node": ">= 4.0.0",

@@ -1,0 +1,253 @@
+// 需要基于'node_modules/sass-sandal/function'
+
+// 设置一个居中定位的%
+%center-flex {
+  @include center-flex;
+}
+%fixed-all {
+  @include fixed(all);
+}
+
+//
+@mixin event-none() {
+  pointer-events: none;
+}
+%event-none {
+  @include event-none;
+}
+
+// padding为15px
+@mixin padding($direction: all, $size: 15px) {
+  @if $direction == top {
+    padding-top: $size;
+  }
+  @if $direction == bottom {
+    padding-bottom: $size;
+  }
+  @if $direction == left {
+    padding-left: $size;
+  }
+  @if $direction == right {
+    padding-right: $size;
+  }
+  @if $direction == v {
+    padding-left: $size;
+    padding-right: $size;
+  }
+  @if $direction == h {
+    padding-top: $size;
+    padding-bottom: $size;
+  }
+  @if $direction == all {
+    padding: $size;
+  }
+}
+
+%padding {
+  @include padding;
+}
+%padding-l {
+  @include padding(left);
+}
+%padding-r {
+  @include padding(right);
+}
+%padding-t {
+  @include padding(top);
+}
+%padding-b {
+  @include padding(bottom);
+}
+%padding-v {
+  @include padding(v);
+}
+%padding-h {
+  @include padding(h);
+}
+
+// margin为15px
+@mixin margin($direction: all, $size: 15px) {
+  @if $direction == top {
+    margin-top: $size;
+  }
+  @if $direction == bottom {
+    margin-bottom: $size;
+  }
+  @if $direction == left {
+    margin-left: $size;
+  }
+  @if $direction == right {
+    margin-right: $size;
+  }
+  @if $direction == v {
+    margin-left: $size;
+    margin-right: $size;
+  }
+  @if $direction == h {
+    margin-top: $size;
+    margin-bottom: $size;
+  }
+  @if $direction == all {
+    margin: $size;
+  }
+}
+
+%margin {
+  @include margin;
+}
+%margin-l {
+  @include margin(left);
+}
+%margin-r {
+  @include margin(right);
+}
+%margin-t {
+  @include margin(top);
+}
+%margin-b {
+  @include margin(bottom);
+}
+%margin-v {
+  @include margin(v);
+}
+%margin-h {
+  @include margin(h);
+}
+
+// 扩大点击区域
+@mixin enlarge-click($x: 10, $y: 20) {
+  position: absolute;
+  left: percentage(- $x / 100);
+  top: percentage(- $y / 100);
+  width: percentage(($x * 2 + 100) / 100);
+  height: percentage(($y * 2 + 100) / 100);
+  min-height: inherit;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+}
+
+%enlarge-click {
+  @include enlarge-click;
+}
+
+// absolute top or bottom or bottom & top
+@mixin absolute($pos: 0) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  @if $pos == bottom {
+      bottom: 0;
+  } @else if $pos == all {
+      top: 0;
+      bottom: 0;
+  } @else {
+      top: $pos;
+  }
+}
+%absolute-all {
+  @include absolute(all);
+}
+%absolute-top {
+    @include absolute;
+}
+%absolute-bottom {
+    @include absolute(bottom);
+}
+
+@mixin heart($width, $bgkColor) {
+  background-color: $bgkColor;
+  width: $width;
+  height: $width;
+  position: relative;
+  top: $width/4;
+  bottom: 0;
+  left: 0; right: 0;
+  transform: rotate(-45deg);
+  &:before, &:after {
+    content: '';
+    width: $width;
+    height: $width;
+    border-radius: 50%;
+    background-color: $bgkColor;
+    position: absolute;
+  }
+  &:before {
+    top: -$width / 2;
+    left: 0;
+  }
+  &:after {
+    top: 0;
+    left: $width / 2;
+  }
+}
+
+// 自定义可输入单选框
+@mixin diy-checker-box($diy, $iconColor) {
+  .vux-checker-box {
+    @extend %display-flex;
+    flex-wrap: wrap;
+    .checker-item {
+      @extend %center-flex;
+      min-width: 62px;
+      width: 21.5%;
+      font-size: 14px;
+      margin: 5px;
+      height: 36px;
+      border-radius: 3px;
+      border: 1px solid $colorBorder;
+      overflow: hidden;
+      &:nth-child(4n):not(.ipt-checker) {
+        -webkit-flex: 1 1 1 62px;
+        flex: 1;
+      }
+      &-selected {
+        position: relative;
+        color: $diy;
+        background: rgba(255,255,255,.3);
+        border-color: $diy;
+        &:before {
+          border-color: $diy;
+        }
+        &:after {
+          content: '\EA08';
+          font-family: weui;
+          font-style: normal;
+          font-weight: 300;
+          position: absolute;
+          width: 35px;
+          height: 35px;
+          background-color: $diy;
+          top: -22px;
+          right: -16px;
+          border-radius: 50%;
+          color: $iconColor;
+          text-indent: 7px;
+          display: flex;
+          align-items: flex-end;
+          font-size: 10px;
+        }
+      }
+      &.ipt-checker {
+        @extend %display-flex;
+        min-width: 136px;
+        -webkit-flex: 1 1 136px;
+        input {
+          width: 100%;
+          height: 90%;
+          z-index: 1;
+          position: relative;
+          border: none;
+          background: transparent;
+          text-indent: 15px;
+        }
+        span {
+          margin-right: 15px;
+        }
+      }
+    }
+  }
+  .btn-content {
+    padding-top: 10px;
+  }
+}

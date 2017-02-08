@@ -2,25 +2,27 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0,minimal-ui"/>
     <meta content="telephone=no" name="format-detection"/>
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0">
     <title></title>
     <link rel="stylesheet" href="//at.alicdn.com/t/font_c4v4y4uhfuk57b9.css">
+    <% if (htmlWebpackPlugin.options.baiduAnalysis) { %>
     <script>
-//      var _hmt = _hmt || [];
-//      (function() {
-//        var hm = document.createElement("script");
-//        hm.src = "//hm.baidu.com/hm.js?5c3f5f29fd75dc08d3a0dfea32992f22";
-//        var s = document.getElementsByTagName("script")[0];
-//        s.parentNode.insertBefore(hm, s);
-//      })();
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?<%= htmlWebpackPlugin.options.baiduAnalysis%>";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
     </script>
+    <% } %>
   </head>
   <body>
+    <div id="app"></div>
     <script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
     <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=O7HBZ-QPEWG-JQ3QZ-IHZGC-MT5UH-PKBSV&libraries=autocomplete,geometry"></script>
     <script>
@@ -30,5 +32,6 @@
       window.htmlFontSize = htmlFontSize
       document.body.addEventListener('touchstart', function () { });
     </script>
+    <!-- built files will be auto injected -->
   </body>
 </html>

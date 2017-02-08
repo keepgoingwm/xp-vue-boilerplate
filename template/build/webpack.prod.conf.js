@@ -43,6 +43,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: config.build.index,
       template: 'index.prod.html',
+      baiduAnalysis: '11111',
       inject: true,
       minify: {
         removeComments: true,

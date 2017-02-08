@@ -35,5 +35,5 @@ exports.topTip = (opts) => {
 }
 
 exports.getRoutePath = (name) => {
-  return router._recognizer.names[name] && router._recognizer.names[name].handlers[handlers.length - 1].handler.fullPath
+  return router._recognizer.names[name] && router._recognizer.names[name].handlers[router._recognizer.names[name].handlers.length - 1].handler.fullPath
 }
