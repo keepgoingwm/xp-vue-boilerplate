@@ -6,13 +6,13 @@
              placeholder="输入模拟用户id"
              v-model="id">
     </x-input>
-    <cell title="模拟登陆所给用户id" @click="fakeLogin(id)" is-link>
+    <cell title="模拟登陆所给用户id" @click.native="fakeLogin(id)" is-link>
       <span class="iconfont icon-rank route-link" slot="icon"></span>
     </cell>
-    <cell title="清理cookies" @click="clearCookies" is-link>
+    <cell title="清理cookies" @click.native="clearCookies" is-link>
       <span class="iconfont icon-rank route-link" slot="icon"></span>
     </cell>
-    <cell title="组件" @click="this.routerGo('components')" is-link>
+    <cell title="组件" @click.native="this.routerGo('components')" is-link>
       <span class="iconfont icon-rank route-link" slot="icon"></span>
     </cell>
   </group>
