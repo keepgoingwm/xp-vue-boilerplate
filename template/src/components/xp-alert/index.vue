@@ -1,6 +1,6 @@
 <template>
   <div class="vux-alert">
-    <dialog
+    <x-dialog
     class="weui_dialog_alert"
     :show="show"
     :mask-transition="maskTransition"
@@ -8,22 +8,22 @@
     @on-hide="$emit('on-hide')"
     @on-show="$emit('on-show')">
       <div class="weui_dialog_hd">
-        <i class="iconfont icon-{{iconName}}" :style="iconStyle"></i> <strong class="weui_dialog_title">{{title}}</strong>
+        <i class="iconfont" :class="fullIconName" :style="iconStyle"></i> <strong class="weui_dialog_title">{{title}}</strong>
       </div>
       <div class="weui_dialog_bd"><slot></slot></div>
       <div class="weui_dialog_ft">
         <a href="javascript:;" class="weui_btn_dialog primary" @click="onHide">{{buttonText}}</a>
       </div>
-    </dialog>
+    </x-dialog>
   </div>
 </template>
 
 <script>
-import Dialog from 'vux-src-components/dialog'
+import {XDialog} from 'vux'
 
 export default {
   components: {
-    Dialog
+    XDialog
   },
   props: {
     show: Boolean,
@@ -41,6 +41,11 @@ export default {
     dialogTransition: {
       type: String,
       default: 'vux-dialog'
+    }
+  },
+  computed: {
+    fullIconName () {
+      return 'icon' + this.iconName
     }
   },
   methods: {

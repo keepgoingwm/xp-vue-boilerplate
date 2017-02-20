@@ -1,4 +1,4 @@
-import { autosize } from './directives/atuosize/index'
+import { autosize } from './directives/autosize/index'
 // import { preview } from './directives/wx-preview-image'
 // import { avatar } from './directives/default-avatar'
 // import { xpImage } from './directives/xp-image'

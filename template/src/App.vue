@@ -9,10 +9,10 @@
            :time="toast.time"
            mask-transition=""
            dialog-transition=""
-           :width="toast.text.length > 7 ? '18em' : null">{{ toast.text }}</toast>
+           :width="toast.text.length > 7 ? '18em' : null"><div v-html="toast.text"></div></toast>
     <xp-top-tip :show.sync="topTip.show"
                 :time="topTip.time"
-                v-if="topTip.show">{{{ topTip.text }}}</xp-top-tip>
+                v-if="topTip.show"><div v-html="topTip.text"></div></xp-top-tip>
     <alert :show.sync="alert.show"
            :icon-name="alert.iconName"
            :icon-style="alert.iconStyle"
@@ -21,7 +21,7 @@
            mask-transition=""
            dialog-transition=""
            @on-show="alert.onShow"
-           @on-hide="alert.onHide">{{{ alert.text }}}</alert>
+           @on-hide="alert.onHide"><div v-html="alert.text"></div></alert>
     <confirm :show.sync="confirm.show"
              :title="confirm.title"
              :confirm-text="confirm.confirmText"
@@ -29,7 +29,7 @@
              @on-confirm="confirm.onConfirm"
              @on-cancel="confirm.onCancel"
              @on-show="confirm.onShow"
-             @on-hide="confirm.onHide" v-if="confirm.show">{{{ confirm.text }}}</confirm>
+             @on-hide="confirm.onHide" v-if="confirm.show"><div v-html="confirm.text"></div></confirm>
   </div>
 </template>
 
@@ -55,7 +55,7 @@ export default {
         type: 'text',
         time: null,
         text: '',
-        callback: emptyFunc
+        callback: _.noop
       },
       topTip: {
         show: false,
@@ -69,8 +69,8 @@ export default {
         title: '',
         text: '',
         buttonText: '确定',
-        onShow: emptyFunc,
-        onHide: emptyFunc
+        onShow: _.noop,
+        onHide: _.noop
       },
       confirm: {
         show: false,
@@ -78,10 +78,10 @@ export default {
         text: '',
         confirmText: '确定',
         cancelText: '取消',
-        onConfirm: emptyFunc,
-        onCancel: emptyFunc,
-        onShow: emptyFunc,
-        onHide: emptyFunc
+        onConfirm: _.noop,
+        onCancel: _.noop,
+        onShow: _.noop,
+        onHide: _.noop
       }
     }
   },
@@ -96,13 +96,13 @@ export default {
     loading ({ show = true, text = '加载中...' }) {
       this.loading = {show, text}
     },
-    toast ({ show = true, type = 'text', time = 2000, text = '', callback = emptyFunc }) {
+    toast ({ show = true, type = 'text', time = 2000, text = '', callback = _.noop }) {
       this.toast = { show, type, time, text, callback }
     },
     topTip ({ show = true, text = 'text', time = 2000 }) {
       this.topTip = { show, text, time }
     },
-    alert ({show = true, title = '', iconName = '', iconStyle = null, text = '', buttonText = '确定', onShow = emptyFunc, onHide = emptyFunc}) {
+    alert ({show = true, title = '', iconName = '', iconStyle = null, text = '', buttonText = '确定', onShow = _.noop, onHide = _.noop}) {
       this.alert = { show, title, iconName, iconStyle, text, buttonText, onShow, onHide }
     },
     confirm ({
@@ -111,10 +111,10 @@ export default {
             text = '',
             confirmText = '确定',
             cancelText = '取消',
-            onConfirm = emptyFunc,
-            onCancel = emptyFunc,
-            onShow = emptyFunc,
-            onHide = emptyFunc
+            onConfirm = _.noop,
+            onCancel = _.noop,
+            onShow = _.noop,
+            onHide = _.noop
     }) {
       this.confirm = { show, title, text, confirmText, cancelText, onConfirm, onCancel, onShow, onHide }
     }

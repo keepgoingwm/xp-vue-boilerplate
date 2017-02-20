@@ -1,4 +1,4 @@
-import Autosize from 'index'
+import Autosize from 'autosize'
 
 export let autosize = {
   bind () {

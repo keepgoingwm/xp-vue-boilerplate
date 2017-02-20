@@ -1,4 +1,5 @@
 import Vue from 'vue'
+// import Vue from 'E:/Downloads/vue-2.1.10/dist/vue.runtime.js'
 
 import installStyles from './installStyles'
 installStyles()
