@@ -1,11 +1,16 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
+var chalk = require('chalk')
 var buildConfig = require('./build-config')
+var error = function (text) {
+  return chalk.bold.white.bgRed('Error: ' + text)
+}
 
 try {
   var env = require('../env')
 } catch (err) {
-  console.warn('no env config')
+  console.log(error('no env config'))
+  process.exit(1)
 }
 
 var isProduction = (process.env.NODE_ENV === 'production')
