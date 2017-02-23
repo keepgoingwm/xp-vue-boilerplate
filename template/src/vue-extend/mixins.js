@@ -4,21 +4,21 @@ import appUtils from '../utils/_self/appUtils'
 // import data from './mixins/data'
 // import throttledExec from './mixins/throttedExec'
 
-import { global, setting } from 'src/store/getters'
-
 export default {
   // data,
   // throttledExec,
   base: {
-    vuex: {
-      getters: {
-        global,
-        setting
-      }
-    },
     data () {
       return {
         htmlFontSize: window.htmlFontSize
+      }
+    },
+    computed: {
+      setting () {
+        return this.$store.state.setting
+      },
+      global () {
+        return this.$store.state.setting.base
       }
     },
     methods: Object.assign(

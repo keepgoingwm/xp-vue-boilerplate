@@ -9,7 +9,7 @@ let apiPrefix = '/api'
  */
 if (process.env.NODE_ENV !== 'production') {
   exports.getLogin = (userId, httpOptions, options) => {
-    return throttle.call('get', `${apiPrefix}/login?code=${userId}`, httpOptions, options)
+    return TH.call('get', `${apiPrefix}/login?code=${userId}`, httpOptions, options)
   }
 }
 
@@ -28,12 +28,12 @@ exports.postWechatJsConfig = (body, httpOptions, options) => {
  * ----------------------------------------------------------------------------
  */
 exports.getPlanEvent = (urlOptions, httpOptions, options) => {
-  return throttle.call('get', `${apiPrefix}/plan_events/${urlOptions.planEventId}`, httpOptions, options)
+  return TH.call('get', `${apiPrefix}/plan_events/${urlOptions.planEventId}`, httpOptions, options)
 }
 /**
  * 用户
  * ----------------------------------------------------------------------------
  */
 exports.getUser = (httpOptions, options) => {
-  return throttle.call('get', `${apiPrefix}/user`, httpOptions, options)
+  return TH.call('get', `${apiPrefix}/user`, httpOptions, options)
 }

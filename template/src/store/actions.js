@@ -5,10 +5,11 @@ import * as types from './mutation-types'
  * 基础
  * ----------------------------------------------------------------------------
  */
-export const getSetting = ({ dispatch }, options, httpOptions) => {
+export const getSetting = ({ state, commit }, options, httpOptions) => {
+  commit(types.SET_SETTING, {a: 'test'})
   return new Promise((resolve, reject) => {
     Api.getSetting(options, httpOptions).then(response => {
-      dispatch(types.SET_SETTING, response.json())
+      commit(types.SET_SETTING, response.json())
       resolve(response)
     }).catch(data => {
       reject(data)

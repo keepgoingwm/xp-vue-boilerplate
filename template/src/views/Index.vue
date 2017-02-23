@@ -42,6 +42,12 @@ export default {
       }
     }
   },
+  mounted () {
+    console.log('ob', this.__ob__)
+    this.$store.dispatch('getSetting').then((data) => {
+      console.log(data)
+    })
+  },
   methods: {
     fakeLogin (id) {
       this.loading('请求中...')

@@ -1,5 +1,6 @@
 let dispatchFunc = (event, opts) => {
-  router.app.$dispatch(event, opts)
+  console.log('$dispatch 需要替代')
+  // router.app.$dispatch(event, opts)
 }
 
 exports.loading = (opts) => {

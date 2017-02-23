@@ -1,5 +1,5 @@
 import Vue from 'vue'
-// import Vue from 'E:/Downloads/vue-2.1.10/dist/vue.runtime.js'
+// import Vue from 'E:/02Project/MyGitHub/vue/dist/vue.runtime.common.js'
 
 import installStyles from './installStyles'
 installStyles()
@@ -24,5 +24,10 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
+  // render: function (createElement) {
+  //   return createElement(
+  //     'app'
+  //   )
+  // },
   components: { App }
 })

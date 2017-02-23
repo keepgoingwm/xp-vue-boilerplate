@@ -1,8 +1,8 @@
 if (!Vue) {
   var Vue = require('vue')
 }
-import { defaultHttpErrorHandler } from '../libs/error-handler/index'
-import { loading } from '../libs/_self/appUtils'
+import { defaultHttpErrorHandler } from '../utils/error-handler/index'
+import { loading } from '../utils/_self/appUtils'
 
 export default class ThrottledHttp {
   constructor (options = {}) {
@@ -95,10 +95,19 @@ export default class ThrottledHttp {
       })
     }
 
+    let getRequestPattern = function () {
+      let str = method + url + window.location
+      str = body !== undefined ? str + JSON.stringify(body) : str
+      str = options !== undefined ? str + JSON.stringify(options) : str
+      str = httpOptions !== undefined ? str + JSON.stringify(httpOptions) : str
+
+      return str
+    }
+
     let request
     if (index === -1) {
       request = {
-        value: str,
+        value: getRequestPattern(),
         status: 'pending'
       }
       request.promise = makePromise(request)

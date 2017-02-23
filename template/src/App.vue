@@ -34,11 +34,13 @@
 </template>
 
 <script type="text/ecmascript-6">
+import store from './store'
 import {Loading, Toast, Confirm} from 'vux'
 import Alert from './components/xp-alert/index.vue'
 import XpTopTip from './components/xp-top-tip/index.vue'
 export default {
   name: 'app',
+  store,
   components: { Loading, Toast, Alert, Confirm, XpTopTip },
   data () {
     return {

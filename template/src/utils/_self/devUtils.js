@@ -4,7 +4,10 @@ if (!Vue) {
 
 var installDevUtils = function (options) {
   window.vConsole = require('vconsole')
+  require('vconsole-resources')
+  require('./dev/vConsoleUtils')
 
+  window.vue = Vue
   window.vueGlobalConfig = Vue.config
   window.vueGlobalComponents = Vue.options.components
   window.vueGlobalElComponents = Vue.options.elementDirectives
