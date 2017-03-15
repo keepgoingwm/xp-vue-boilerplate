@@ -12,7 +12,11 @@ module.exports = (function () {
         productionSourceMap: true,
         productionGzip: true,
         productionGzipExtensions: ['js', 'css'],
-        packStats: path.resolve(__dirname, '../profile/packStats.json')
+        packStats: path.resolve(__dirname, '../profile/packStats.json'),
+        htmlConfig: {
+          title: 'test',
+          baiduAnalysis: '11111'
+        }
       }
     case 'testing':
       return {

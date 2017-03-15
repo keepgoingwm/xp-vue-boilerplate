@@ -43,7 +43,7 @@ export default {
     }
   },
   mounted () {
-    console.log('ob', this.__ob__)
+    console.log('__ob__', this.$watch)
     this.$store.dispatch('getSetting').then((data) => {
       console.log(data)
     })

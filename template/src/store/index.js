@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import setting from './modules/setting'
 import * as actions from './actions'
 import * as getters from './getters'
+import createLogger from 'vuex/dist/logger'
 
 Vue.use(Vuex)
 
@@ -14,5 +15,6 @@ export default new Vuex.Store({
   getters,
   modules: {
     setting
-  }
+  },
+  plugins: debug ? [createLogger()] : []
 })
